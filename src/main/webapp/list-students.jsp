@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Web Student Book</title>
-    <link type="text/css"rel="stylesheet"href="css/style.css">
+    <link type="text/css"rel="stylesheet" href="css/style.css">
 </head>
 <% List<Student> theStudents = (List<Student>)request.getAttribute("STUDENTS"); %>
 <body>
