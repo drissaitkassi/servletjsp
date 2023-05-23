@@ -2,10 +2,7 @@ package com.example.studentappjspservlet;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,4 +58,38 @@ public class StudentDBUtil {
         return students;
     }
 
+    public void saveStudent(Student student) {
+
+        Connection conn= null;
+        Statement st=null;
+        ResultSet rs=null;
+        try {
+            dataSource = getDataSource();
+            conn = dataSource.getConnection();
+            String query="insert into students (firstname, lastname, email) values (?,?,?)";
+            PreparedStatement preparedStatement=conn.prepareStatement(query);
+            preparedStatement.setString(1,student.getFirstName());
+            preparedStatement.setString(2,student.getLastName());
+            preparedStatement.setString(3,student.getEmail());
+            preparedStatement.executeQuery();
+            preparedStatement.close();
+
+            System.out.println("im on save student method below preparestatment");
+
+        }catch (Exception exc){
+            System.out.println(exc.getMessage());
+
+        }
+        finally {
+            try {
+                assert conn != null;
+                //todo you need to close the connection
+                conn.close();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
 }

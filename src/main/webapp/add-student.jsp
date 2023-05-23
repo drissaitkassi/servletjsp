@@ -14,18 +14,19 @@
     <%= test %>--%>
 
 <h1> Add Student View </h1>
+<hr>
+
+<h2> ${requestScope.email}</h2>
 
 <div id="container">
-
-        <form>
+        <form name="addForm" method="GET" action="AddStudentServlet">
             <table>
-
                     <tr>
                         <td>
                             <label> firstName :</label>
                         </td>
                         <td>
-                            <input type="text">
+                            <input type="text" name="firstname">
                         </td>
                     </tr>
                     <tr>
@@ -33,7 +34,7 @@
                             <label> lastName :</label>
                         </td>
                         <td>
-                            <input type="text">
+                            <input type="text" name="lastname">
                         </td>
                     </tr>
                     <tr>
@@ -41,15 +42,12 @@
                             <label> email :</label>
                         </td>
                         <td>
-                            <input type="text">
+                            <input type="text" name="email">
                         </td>
                     </tr>
-
             </table>
             <button type="submit" id="save"> Save </button>
         </form>
     </div>
-
-
 </body>
 </html>

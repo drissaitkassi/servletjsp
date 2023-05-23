@@ -9,12 +9,19 @@
 }
 
 h1 {
-	background: #BBBBBB;
 	margin-top: 50px;
 	display: flex;
 	justify-content: center;
 	align-content: center;
 }
+hr {
+	border: 2px solid red;
+	border-radius: 50%;
+	margin-left: 200px;
+	margin-right: 200px;
+
+}
+
 
 form {
 	margin-top: 10px;
