@@ -12,6 +12,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 @WebServlet(name = "TestServlet", value = "/TestServlet")
@@ -48,6 +49,14 @@ public class TestServlet extends HttpServlet {
         }catch (Exception exc){
             System.out.println(exc.getMessage());
 
+        }
+        finally {
+            try {
+                assert conn != null;
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }
