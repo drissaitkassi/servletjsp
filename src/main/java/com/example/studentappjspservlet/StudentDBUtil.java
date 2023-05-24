@@ -92,4 +92,37 @@ public class StudentDBUtil {
         }
 
     }
+
+    public void deleteStudent(int id) {
+
+        Connection conn= null;
+        Statement st=null;
+        ResultSet rs=null;
+        try {
+            dataSource = getDataSource();
+            conn = dataSource.getConnection();
+            String query="delete from students where id = ?";
+            PreparedStatement preparedStatement=conn.prepareStatement(query);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+
+        }catch (Exception exc){
+            System.out.println(exc.getMessage());
+
+        }
+        finally {
+            try {
+                assert conn != null;
+                //todo you need to close the connection
+                conn.close();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+
+    }
 }
