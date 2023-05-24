@@ -19,7 +19,7 @@
 <h2> ${requestScope.email}</h2>
 
 <div id="container">
-        <form name="addForm" method="POST" action="AddStudentServlet">
+        <form name="addForm" method="GET" action="AddStudentServlet">
             <table>
                     <tr>
                         <td>

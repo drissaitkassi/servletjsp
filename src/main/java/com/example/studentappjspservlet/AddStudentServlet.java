@@ -37,20 +37,20 @@ public class AddStudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("add-student.jsp");
-        dispatcher.forward(request,response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstname=request.getParameter("firstname");
         String lastname=request.getParameter("lastname");
         String email=request.getParameter("email");
         Student student=new Student(firstname,lastname,email);
         studentDBUtil.saveStudent(student);
 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("add-student.jsp");
+        dispatcher.forward(request,response);
 
 
-        response.sendRedirect("list-student.jsp");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 }

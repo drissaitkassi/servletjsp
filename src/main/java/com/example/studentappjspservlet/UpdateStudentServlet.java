@@ -3,20 +3,17 @@ package com.example.studentappjspservlet;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@WebServlet(name = "AddStudentServlet", value = "/AddStudentServlet")
+@WebServlet(name = "UpdateStudentServlet", value = "/UpdateStudentServlet")
 public class UpdateStudentServlet extends HttpServlet {
     private DataSource dataSource;
     private  StudentDBUtil studentDBUtil;
+    private  String myId;
 
     @Override
     public void init() throws ServletException {
@@ -29,7 +26,6 @@ public class UpdateStudentServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
     private DataSource getDataSource() throws NamingException, NamingException {
 
         String jndi="java:comp/env/jdbc/servletjsp" ;
@@ -40,23 +36,26 @@ public class UpdateStudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out=response.getWriter();
-        out.println("testing this servlet ");
+        myId=request.getParameter("id");
         String firstname=request.getParameter("firstname");
         String lastname=request.getParameter("lastname");
         String email=request.getParameter("email");
-        Student student=new Student(firstname,lastname,email);
-        studentDBUtil.saveStudent(student);
-        System.out.println("im on doget method below  studentDBUtil.saveStudent(student);");
+      ;
 
-//        request.setAttribute("email",email);
-        out.println(email);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("add-student.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("update-student.jsp");
         dispatcher.forward(request,response);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("im in do post method");
+        String firstname=request.getParameter("firstname");
+        String lastname=request.getParameter("lastname");
+        String email=request.getParameter("email");
+        Student student=new Student(Integer.parseInt(myId),firstname,lastname,email);
+        studentDBUtil.updateStudent( student);
 
+        response.sendRedirect("StudentControllerServlet");
     }
 }

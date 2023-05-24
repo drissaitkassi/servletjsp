@@ -125,4 +125,40 @@ public class StudentDBUtil {
 
 
     }
+
+    public void updateStudent(Student student) {
+
+        Connection conn= null;
+        Statement st=null;
+        ResultSet rs=null;
+        try {
+            dataSource = getDataSource();
+            conn = dataSource.getConnection();
+            String query="update students set firstname = ? ,lastname = ? , email = ?  where id =?;";
+            PreparedStatement preparedStatement=conn.prepareStatement(query);
+            preparedStatement.setString(1,student.getFirstName());
+            preparedStatement.setString(2,student.getLastName());
+            preparedStatement.setString(3,student.getEmail());
+            preparedStatement.setInt(4,student.getId());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            System.out.println("im on save student method below preparestatment");
+
+        }catch (Exception exc){
+            System.out.println(exc.getMessage());
+
+        }
+        finally {
+            try {
+                assert conn != null;
+                //todo you need to close the connection
+                conn.close();
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
 }

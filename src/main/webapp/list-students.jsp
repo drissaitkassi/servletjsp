@@ -19,6 +19,7 @@
 </div>
 <div id="container">
     <div id="content">
+        <button class="add-student-button"> <a href="add-student.jsp">Add Student</a> </button>
         <table>
             <tr>
                 <th>First Name </th>
@@ -36,7 +37,10 @@
                         <input type="hidden" name="id" value="<%= tempStudent.getId() %>">
                         <button type="submit" class="edit">DELETE</button>
                     </form>
-                    <a href="add-student.jsp">EDITE</a>
+                    <form action="UpdateStudentServlet" method="GET" >
+                        <input type="hidden" name="id" value="<%= tempStudent.getId() %>">
+                        <button type="submit" class="edit">EDIT</button>
+                    </form>
                 </td>
             <%} %>
         </table>
