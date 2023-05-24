@@ -37,23 +37,20 @@ public class AddStudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out=response.getWriter();
-        out.println("testing this servlet ");
-        String firstname=request.getParameter("firstname");
-        String lastname=request.getParameter("lastname");
-        String email=request.getParameter("email");
-        Student student=new Student(firstname,lastname,email);
-        studentDBUtil.saveStudent(student);
-        System.out.println("im on doget method below  studentDBUtil.saveStudent(student);");
-
-//        request.setAttribute("email",email);
-        out.println(email);
         RequestDispatcher dispatcher = request.getRequestDispatcher("add-student.jsp");
         dispatcher.forward(request,response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String firstname=request.getParameter("firstname");
+        String lastname=request.getParameter("lastname");
+        String email=request.getParameter("email");
+        Student student=new Student(firstname,lastname,email);
+        studentDBUtil.saveStudent(student);
 
+
+
+        response.sendRedirect("list-student.jsp");
     }
 }
